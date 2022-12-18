@@ -1,0 +1,59 @@
+﻿<Window x:Class="MemoryLeaks.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MemoryLeaks"
+        xmlns:vm="clr-namespace:MemoryLeaks.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="200"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Label Content="Binding Leak" Padding="5" FontSize="20"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Width="200" Height="50"
+                Content="Change Label" Click="OnChangedLabelButton"/>
+                
+                <Label Name="LeakLabel" Padding="20" FontSize="20"
+                   Content="{Binding Name}"/>
+            </StackPanel>
+            <Label Content="Event Leak" Padding="5" FontSize="20"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Width="200" Height="50"
+                Content="Subscribe Event Leak" Click="OnSubscribeEventLeakButton"/>
+
+                <Button Width="200" Height="50" 
+                Content="Anonymous Event Leak" Click="OnAnonymousEventLeakButton"/>
+            </StackPanel>
+            <Label Content="Root Object Leak" Padding="5" FontSize="20"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Width="200" Height="50" 
+                Content="Static Leak" Click="OnStaticLeak"/>
+                
+                <Button Width="200" Height="50" 
+                Content="Thread Leak" Click="OnThreadLeak"/>
+            </StackPanel>
+            <Label Content="UnManagement Leak" Padding="5" FontSize="20"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Width="200" Height="50" 
+                Content="UnManagement Leak" Click="OnUnManagementLeak"/>
+            </StackPanel>
+        </StackPanel>
+        
+        
+
+    </Grid>
+</Window>
