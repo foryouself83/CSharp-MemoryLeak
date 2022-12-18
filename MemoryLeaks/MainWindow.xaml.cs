@@ -1,4 +1,5 @@
-﻿using MemoryLeaks.MemoryLeak.Event;
+﻿using MemoryLeaks.MemoryLeak.Anonymous;
+using MemoryLeaks.MemoryLeak.Event;
 using MemoryLeaks.MemoryLeak.Root;
 using MemoryLeaks.MemoryLeak.Thread;
 using MemoryLeaks.MemoryLeak.UnManagement;
@@ -53,7 +54,7 @@ namespace MemoryLeaks
         }
         private void CreateAnonymousEventLeak()
         {
-            var leak = new AnonymousEventLeak(_eventLeakHandler);
+            var leak = new AnonymousEventLeak(new AnonymousAction());
             leak = null;
         }
 
