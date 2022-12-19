@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using MemoryLeaks.MemoryLeak.Anonymous;
+using MemoryLeaks.MemoryLeak.Disposable;
 using MemoryLeaks.MemoryLeak.Event;
 using MemoryLeaks.MemoryLeak.Root;
 using MemoryLeaks.MemoryLeak.Thread;
@@ -94,6 +95,22 @@ namespace MemoryLeaks
 
             TriggerGC();
         }
+        private void CreateDisposeLeak()
+        {
+            var dis = new DisposeLeak();
+            // Dispose를 하지 않는 경우 Leak 발생
+            //dis.Dispose();
+            dis = null;
+        }
+        private void OnDisposeLeak(object sender, RoutedEventArgs e)
+        {
+            TriggerGC();
+
+            CreateDisposeLeak();
+
+            TriggerGC();
+        }
+
 
         public void TriggerGC()
         {
