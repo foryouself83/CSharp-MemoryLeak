@@ -1,14 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace MemoryLeaks.MemoryLeak.Thread
 {
     internal class RunningThread
     {
+        System.Threading.Thread _thread;
+
+        public RunningThread()
+        {
+            _thread = new(RunThread);
+            _thread.Start();
+        }
+        public void RunThread()
+        {
+            System.Threading.Thread.Sleep(1000);
+            _thread.Join();
+        }
+
         /// <summary>
         /// 별도의 쓰레드에서 실행되는 경우 해당하는 인스턴스는 GC에 수집되지 않음.
         /// </summary>

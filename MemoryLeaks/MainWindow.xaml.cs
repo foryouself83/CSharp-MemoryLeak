@@ -1,23 +1,10 @@
-﻿using MemoryLeaks.MemoryLeak.Anonymous;
+﻿using System;
+using System.Windows;
+using MemoryLeaks.MemoryLeak.Anonymous;
 using MemoryLeaks.MemoryLeak.Event;
 using MemoryLeaks.MemoryLeak.Root;
 using MemoryLeaks.MemoryLeak.Thread;
 using MemoryLeaks.MemoryLeak.UnManagement;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MemoryLeaks
 {
@@ -83,7 +70,7 @@ namespace MemoryLeaks
         private void CreateThreadRootObject()
         {
             var thread = new RunningThread();
-            thread.RunTimer();
+            //thread.RunTimer();
             thread = null;
         }
         private void OnThreadLeak(object sender, RoutedEventArgs e)
@@ -108,7 +95,7 @@ namespace MemoryLeaks
             TriggerGC();
         }
 
-        public  void TriggerGC()
+        public void TriggerGC()
         {
             GC.Collect();
             GC.WaitForPendingFinalizers();
