@@ -12,6 +12,10 @@ namespace MemoryLeaks.MemoryLeak.Thread
             _thread = new(RunThread);
             _thread.Start();
         }
+        ~RunningThread()
+        {
+            Console.WriteLine($"Released {nameof(RunningThread)}");
+        }
         public void RunThread()
         {
             System.Threading.Thread.Sleep(1000);

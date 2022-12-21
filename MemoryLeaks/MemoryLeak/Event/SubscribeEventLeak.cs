@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MemoryLeaks.MemoryLeak.Event
@@ -22,6 +18,7 @@ namespace MemoryLeaks.MemoryLeak.Event
         }
         ~SubscribeEventLeak()
         {
+            Console.WriteLine($"Released {nameof(SubscribeEventLeak)}");
         }
         private void AddSubscribeEvent()
         {
@@ -38,7 +35,7 @@ namespace MemoryLeaks.MemoryLeak.Event
         }
 
         private void OnLeakEvent(object? sender, RoutedEventArgs e)
-        {            
+        {
         }
     }
 }

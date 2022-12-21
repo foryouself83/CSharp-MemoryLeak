@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MemoryLeaks.MemoryLeak.Root
 {
@@ -24,7 +20,7 @@ namespace MemoryLeaks.MemoryLeak.Root
         }
         ~RootObject()
         {
-
+            Console.WriteLine($"Released {nameof(RootObject)}");
         }
         public void AddObject()
         {

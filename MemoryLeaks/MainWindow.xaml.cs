@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using MemoryLeaks.MemoryLeak.Anonymous;
+using MemoryLeaks.MemoryLeak.Cache;
 using MemoryLeaks.MemoryLeak.Disposable;
 using MemoryLeaks.MemoryLeak.Event;
 using MemoryLeaks.MemoryLeak.Root;
@@ -95,6 +96,24 @@ namespace MemoryLeaks
 
             TriggerGC();
         }
+        private void CreateCachingFunction()
+        {
+            var factory = new FactoryNode();
+            for (int i = 0; i < 100000; i++)
+            {
+                factory.CreateNode(i);
+            }
+            factory = null;
+        }
+        private void OnCacheLeak(object sender, RoutedEventArgs e)
+        {
+            TriggerGC();
+
+            CreateCachingFunction();
+
+            TriggerGC();
+        }
+
         private void CreateDisposeLeak()
         {
             var dis = new DisposeLeak();

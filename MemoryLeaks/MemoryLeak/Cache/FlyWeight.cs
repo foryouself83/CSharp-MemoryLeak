@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MemoryLeaks.MemoryLeak.Cache
 {
@@ -12,23 +9,20 @@ namespace MemoryLeaks.MemoryLeak.Cache
         // 사용하지 않는 캐싱 메모리 삭제
         // 캐싱 크기 제한
         // WeakReference 사용
-        private Dictionary<Type, INode> _factories = new Dictionary<Type, INode>();
+        private Dictionary<int, ProcessNode> _factories = new Dictionary<int, ProcessNode>();
 
-        public INode CreateNode(Type type)
+        ~FactoryNode()
         {
-            if (!_factories.ContainsKey(type))
-            {                
-                if (Activator.CreateInstance(type) is INode node)
-                    _factories.Add(type, node);
-                else
-                    throw new ArgumentException(nameof(type));
+            Console.WriteLine($"Released {nameof(FactoryNode)}");
+        }
+        public INode CreateNode(int key)
+        {
+            if (!_factories.ContainsKey(key))
+            {
+                _factories.Add(key, new ProcessNode());
             }
 
-            return _factories[type];
-        }
-        public T CreateNode<T>() where T : INode
-        {
-            return (T)CreateNode(typeof(T));
+            return _factories[key];
         }
     }
 
@@ -64,6 +58,10 @@ namespace MemoryLeaks.MemoryLeak.Cache
 
         public string UId => _uid;
 
+        public ProcessNode()
+        {
+
+        }
         public ProcessNode(int id)
         {
             _uid = id.ToString();

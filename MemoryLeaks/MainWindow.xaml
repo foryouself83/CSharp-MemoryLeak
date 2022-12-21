@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MemoryLeaks"
         xmlns:vm="clr-namespace:MemoryLeaks.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="650" Width="500">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -55,6 +55,11 @@
 
                 <Button Width="200" Height="50" 
                 Content="Dispose Leak" Click="OnDisposeLeak"/>
+            </StackPanel>
+            <Label Content="Cache Leak" Padding="5" FontSize="20"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Width="200" Height="50" 
+                Content="Cache Leak" Click="OnCacheLeak"/>
             </StackPanel>
         </StackPanel>
     </Grid>

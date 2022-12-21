@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MemoryLeaks.MemoryLeak.Anonymous
 {
@@ -17,6 +13,10 @@ namespace MemoryLeaks.MemoryLeak.Anonymous
 
             // Anonymous method Leak
             AddAnonymousEvent();
+        }
+        ~AnonymousEventLeak()
+        {
+            Console.WriteLine($"Released {nameof(AnonymousEventLeak)}");
         }
         private void AddAnonymousEvent()
         {

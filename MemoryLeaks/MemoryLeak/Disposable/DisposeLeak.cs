@@ -13,6 +13,10 @@ namespace MemoryLeaks.MemoryLeak.Disposable
             _memorySteam = new MemoryStream(409600);
             _memorySteam.Write(new byte[409600]);
         }
+        ~DisposeLeak()
+        {
+            Console.WriteLine($"Released {nameof(DisposeLeak)}");
+        }
 
         protected virtual void Dispose(bool disposing)
         {
